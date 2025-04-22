@@ -46,19 +46,6 @@ USE_HYBRID_APPROACH = True  # Set to True to use both real search and LLM genera
 
 # Google Search API configuration
 # Add your Google API keys here. The system will rotate through them when quota is reached
-GOOGLE_API_KEYS = [
-    "AIzaSyBY_DI_Vd0gvXkVGVaNuPOBLKLQuBmU8jM",  # Google account 1
-    "AIzaSyDx5cBZy2j0IUYxyX3JlDMUNVz6f5UdIxI",  # Google account 2
-    "AIzaSyBwSiSHCfkh6hTG9yZPcy3SVo7NCf1dH5o",  # Google account 3
-    "AIzaSyB1xC9oMXb7e41P1jIW-ileBJocdRaW8do",  # Google account 4
-    "AIzaSyDX9Dj5_9q_rQByIIUKJ-aOL32xV-mMp2g",  # Google account 5
-    "AIzaSyC9ADKv6BkuRxIrp-w1MgsjYfNUdAOgCpw",  # Google account 6
-    "AIzaSyBM92BX9fnaqualLaDXIm7yltrxtzj7ing",  # Google account 7
-    "AIzaSyA3ODCMOEp2dwlDIlSdaJ11gihntgPrB8w",  # Google account 8
-    "AIzaSyCZxBT-jVMZDivF0XagguV4SBP-trEozNQ",  # Google account 9
-    "AIzaSyBoPVNJxnJJM0O4VSCFYUKTX6EiYjB9GHA",  # Google account 10
-]
-GOOGLE_CSE_ID = "834dca1046c534ea2"  # Your Google Custom Search Engine ID
 
 # API usage tracking
 MAX_QUERIES_PER_KEY = 100  # Google free tier typically allows 100 queries per day
