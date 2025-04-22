@@ -1,0 +1,36 @@
+# 4.1 Binary Class Distribution Analysis
+Generated on: 2025-04-22 00:31:55
+
+## Binary Class Distribution
+
+### Train Set
+- True: 5752 samples (56.17%)
+- False: 4488 samples (43.83%)
+- Total: 10240 samples
+
+### Test Set
+- True: 714 samples (56.35%)
+- False: 553 samples (43.65%)
+- Total: 1267 samples
+
+### Validation Set
+- True: 668 samples (52.02%)
+- False: 616 samples (47.98%)
+- Total: 1284 samples
+
+### Overall
+- True: 7134 samples (55.77%)
+- False: 5657 samples (44.23%)
+- Total: 12791 samples
+
+### Class Imbalance Analysis
+- Majority class: True with 7134 samples
+- Minority class: False with 5657 samples
+- Imbalance ratio (majority:minority): 1.26
+- **Note**: Class distribution is relatively balanced (imbalance ratio < 1.5)
+
+
+![Binary Class Distribution](plots/4.1_binary_class_distribution.png)
+
+
+![Binary Class Distribution - Pie Charts](plots/4.1_binary_class_distribution_pie.png)

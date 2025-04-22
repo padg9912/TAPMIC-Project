@@ -1,0 +1,23 @@
+Project Title: TAPMIC (Temporally Aware Political Misinformation Classification)
+
+Idea: Create a RAG pipeline for binary classification task using BERT classifier. 
+
+Dataset and Preprocessing: The dataset we use here is LIAR dataset (12.9k samples). It already has train, test and validation set splits(.csv file). The dataset has 6 class classification for truthfulness of a claim. So we convert them into 2 classes by these two rules. TRUE labels: "true", "mostly-true", "half-true” and FALSE labels: "barely-true", "false", "pants-fire”. Then we create an analysis report (with visualizations) from the raw dataset. Then according to the analysis report we check if need to address any missing values, drop any columns from datasets, check if normalization or tokenization is required, is there a need to apply SMOTE for class balancing.
+
+RAG pipeline and Preprocessing: We use a RAG pipeline that uses search API/web scrapping to generate evidences with temporal information from extracted claims. These evidences and their claims goes through some data preprocessing and are stored in Chroma DB. Then we create an analysis report (with visualizations) using claims and evidences. Then according to the analysis report we check if need to address any missing values, drop any columns from datasets, check if normalization or tokenization is required, or any preprocessing step. 
+After all these data preprocessing steps we create another analysis report in general and (with visualization) specifically on temporal data. We then study other features and temporal data for understanding how to use them like 1. extracting year, month, day features from publication dates then, 2. Calculating time differences between related claims then 3. Analyzing how truth values may change over time periods then 4. Creating features based on temporal clusters or sequences. We do the feature extraction step then. 
+
+Final Dataset Analysis: We then create the final dataset (final_train.csv, final_test.csv, final_validation and final_evidences.json). 
+
+Model Training: We then enter model training stage. We are going to use the standard huggingface pre-trained BERT model to train on our final dataset. I am going to use google colab GPU for training. To effectively leverage both the textual and temporal features in our classification task, we adopt a hybrid modeling approach. Specifically, we first process the claim and evidence text through a pre-trained BERT model to obtain contextualized text embeddings. In parallel, we encode the extracted temporal features (such as year, month, time differences, and temporal clusters) using appropriate normalization or encoding techniques. These temporal feature vectors are then concatenated with the BERT text embeddings, creating a unified feature representation. This combined vector is fed into a fully connected classification layer, allowing the model to jointly learn from both the unstructured text and structured temporal information. This hybrid method ensures that the temporal context is directly incorporated into the model's decision-making process, enhancing the overall classification performance. While training we use wandb to visualize and keep checking our runs. 
+During our training we calculate necessary metrics to create evaluation reports. Based on the evaluation reports we do a little bit fine tuning of our BERT on our dataset with hyper parameter tuning if required. We will do max 5 training runs and checking reports for best accuracy and metrics. We then get an open source LLM to use as LLM classifier on our final dataset without fine tuning and purely based on prompts. We create evaluation report on that LLM classification too. Model Comparison. We compare metrics and data from BERT and LLM classifiers. We specifically highlight Temporal information and metrics due to them. We get comparison and evaluation reports (with visualization) for both classifiers. 
+
+Complete RAG pipeline: We complete our start to end RAG pipeline of anything remains. 
+
+Output Comparison: We generate reports based on the outputs on the classification with visualization and metrics reporting. Simple App development: We create a simple gradio web app on local machine that uses both our BERT and LLM classifiers to do classification tasks. 
+
+Presentation: Create a PPT for our project to showcase what we have done. 
+
+Final Paper: Write a 4-5 pages final paper for the project. 
+
+

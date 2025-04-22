@@ -1,0 +1,322 @@
+# 4.4 Field Analysis
+Generated on: 2025-04-22 00:55:12
+
+## 1. Dataset Structure
+
+The binary classification dataset consists of 12791 samples and 15 columns.
+
+### Column Types
+- **Categorical Columns (9):** id, statement, subject, speaker, speaker_job, state, party, context, original_label
+- **Numerical Columns (5):** barely_true_counts, false_counts, half_true_counts, mostly_true_counts, pants_on_fire_counts
+
+## 2. Categorical Field Analysis
+
+### Id Analysis
+- **Unique Values:** 12791
+- **Top 10 Values:**
+  - 2635.json: 1 (0.01%)
+  - 1680.json: 1 (0.01%)
+  - 8964.json: 1 (0.01%)
+  - 11484.json: 1 (0.01%)
+  - 2666.json: 1 (0.01%)
+  - 1072.json: 1 (0.01%)
+  - 13430.json: 1 (0.01%)
+  - 6355.json: 1 (0.01%)
+  - 7539.json: 1 (0.01%)
+  - 8681.json: 1 (0.01%)
+
+![Id Top Categories](plots/4.4_id_top_categories.png)
+
+
+#### Predictive Value Analysis
+**Categories with High TRUE:FALSE Ratio:**
+
+**Categories with High FALSE:TRUE Ratio:**
+#### Statistical Significance
+- **Chi-Square Test:** χ² = 12791.00, p-value = 0.495843
+- **Result:** No statistically significant association detected between Id and truth label (p >= 0.05)
+
+### Subject Analysis
+- **Unique Values:** 4535
+- **Top 10 Values:**
+  - health-care: 474 (3.71%)
+  - taxes: 356 (2.78%)
+  - education: 309 (2.42%)
+  - elections: 304 (2.38%)
+  - immigration: 303 (2.37%)
+  - candidates-biography: 239 (1.87%)
+  - economy: 170 (1.33%)
+  - federal-budget: 152 (1.19%)
+  - economy,jobs: 152 (1.19%)
+  - guns: 152 (1.19%)
+
+![Subject Top Categories](plots/4.4_subject_top_categories.png)
+
+
+#### Predictive Value Analysis
+**Categories with High TRUE:FALSE Ratio:**
+- education,state-budget,state-finances: 3.83 (29 samples)
+- military: 3.73 (52 samples)
+- poverty: 3.40 (22 samples)
+- crime,criminal-justice: 2.71 (26 samples)
+- criminal-justice: 2.56 (32 samples)
+
+**Categories with High FALSE:TRUE Ratio:**
+- labor,state-budget: 3.62 (37 samples)
+- foreign-policy,terrorism: 2.78 (34 samples)
+- religion: 2.25 (39 samples)
+- health-care,medicare: 1.81 (45 samples)
+- health-care,taxes: 1.71 (38 samples)
+#### Statistical Significance
+- **Chi-Square Test:** χ² = 4868.98, p-value = 0.000289
+- **Result:** Subject has a statistically significant association with the truth label (p < 0.05)
+
+### Speaker Analysis
+- **Unique Values:** 3310
+- **Top 10 Values:**
+  - barack-obama: 611 (4.78%)
+  - donald-trump: 343 (2.68%)
+  - hillary-clinton: 297 (2.32%)
+  - mitt-romney: 212 (1.66%)
+  - john-mccain: 189 (1.48%)
+  - scott-walker: 183 (1.43%)
+  - chain-email: 178 (1.39%)
+  - rick-perry: 173 (1.35%)
+  - marco-rubio: 153 (1.2%)
+  - rick-scott: 150 (1.17%)
+
+![Speaker Top Categories](plots/4.4_speaker_top_categories.png)
+
+
+#### Predictive Value Analysis
+**Categories with High TRUE:FALSE Ratio:**
+- kasim-reed: 6.33 (22 samples)
+- dennis-kucinich: 5.25 (25 samples)
+- bill-nelson: 4.40 (27 samples)
+- rob-portman: 4.22 (47 samples)
+- cory-booker: 4.00 (20 samples)
+
+**Categories with High FALSE:TRUE Ratio:**
+- chain-email: 8.37 (178 samples)
+- viral-image: 8.33 (28 samples)
+- blog-posting: 6.36 (81 samples)
+- democratic-congressional-campaign-committee: 4.67 (34 samples)
+- ben-carson: 4.60 (28 samples)
+#### Statistical Significance
+- **Chi-Square Test:** χ² = 4402.31, p-value = 0.000000
+- **Result:** Speaker has a statistically significant association with the truth label (p < 0.05)
+
+### Speaker Job Analysis
+- **Unique Values:** 1355
+- **Top 10 Values:**
+  - MISSING: 3568 (27.89%)
+  - President: 615 (4.81%)
+  - U.S. Senator: 595 (4.65%)
+  - Governor: 487 (3.81%)
+  - President-Elect: 343 (2.68%)
+  - U.S. senator: 328 (2.56%)
+  - Presidential candidate: 314 (2.45%)
+  - Former governor: 212 (1.66%)
+  - U.S. Representative: 210 (1.64%)
+  - Senator: 193 (1.51%)
+
+![Speaker Job Top Categories](plots/4.4_speaker_job_top_categories.png)
+
+
+#### Predictive Value Analysis
+**Categories with High TRUE:FALSE Ratio:**
+- Political commentator: 5.67 (20 samples)
+- U.S. senator from Ohio: 4.22 (47 samples)
+- former president: 3.56 (41 samples)
+- President: 2.82 (615 samples)
+- Presidential candidate: 2.74 (314 samples)
+
+**Categories with High FALSE:TRUE Ratio:**
+- Radio host: 4.57 (39 samples)
+- U.S. representative, Florida District 22: 2.71 (26 samples)
+- Congresswoman: 2.67 (66 samples)
+- President-Elect: 2.36 (343 samples)
+- Social media posting: 2.12 (100 samples)
+#### Statistical Significance
+- **Chi-Square Test:** χ² = 1924.00, p-value = 0.000000
+- **Result:** Speaker Job has a statistically significant association with the truth label (p < 0.05)
+
+### State Analysis
+- **Unique Values:** 85
+- **Top 10 Values:**
+  - MISSING: 2751 (21.51%)
+  - Texas: 1260 (9.85%)
+  - Florida: 1231 (9.62%)
+  - Wisconsin: 900 (7.04%)
+  - New York: 829 (6.48%)
+  - Illinois: 692 (5.41%)
+  - Ohio: 586 (4.58%)
+  - Georgia: 545 (4.26%)
+  - Virginia: 512 (4.0%)
+  - Rhode Island: 452 (3.53%)
+
+![State Top Categories](plots/4.4_state_top_categories.png)
+
+
+#### Predictive Value Analysis
+**Categories with High TRUE:FALSE Ratio:**
+- Connecticut: 3.50 (27 samples)
+- New Mexico: 2.70 (37 samples)
+- Illinois: 2.59 (692 samples)
+- Vermont: 2.34 (117 samples)
+- Maryland: 2.19 (86 samples)
+
+**Categories with High FALSE:TRUE Ratio:**
+- Minnesota: 2.41 (75 samples)
+- Colorado: 1.64 (29 samples)
+#### Statistical Significance
+- **Chi-Square Test:** χ² = 338.61, p-value = 0.000000
+- **Result:** State has a statistically significant association with the truth label (p < 0.05)
+
+### Party Analysis
+- **Unique Values:** 25
+- **Top 10 Values:**
+  - republican: 5665 (44.29%)
+  - democrat: 4137 (32.34%)
+  - none: 2181 (17.05%)
+  - organization: 264 (2.06%)
+  - independent: 180 (1.41%)
+  - newsmaker: 64 (0.5%)
+  - libertarian: 51 (0.4%)
+  - journalist: 49 (0.38%)
+  - activist: 45 (0.35%)
+  - columnist: 44 (0.34%)
+
+![Party Distribution](plots/4.4_party_distribution.png)
+
+#### Statistical Significance
+- **Chi-Square Test:** χ² = 345.33, p-value = 0.000000
+- **Result:** Party has a statistically significant association with the truth label (p < 0.05)
+
+### Context Analysis
+- **Unique Values:** 5143
+- **Top 10 Values:**
+  - a news release: 309 (2.42%)
+  - an interview: 286 (2.24%)
+  - a press release: 282 (2.2%)
+  - a speech: 259 (2.02%)
+  - a TV ad: 222 (1.74%)
+  - a tweet: 190 (1.49%)
+  - a campaign ad: 164 (1.28%)
+  - a television ad: 161 (1.26%)
+  - MISSING: 131 (1.02%)
+  - a radio interview: 126 (0.99%)
+
+![Context Top Categories](plots/4.4_context_top_categories.png)
+
+
+#### Predictive Value Analysis
+**Categories with High TRUE:FALSE Ratio:**
+- the State of the Union address: 10.00 (22 samples)
+- comments on CNN's "State of the Union": 5.50 (26 samples)
+- a newspaper column: 4.00 (20 samples)
+- a letter: 4.00 (20 samples)
+- an interview on MSNBC: 3.62 (37 samples)
+
+**Categories with High FALSE:TRUE Ratio:**
+- a chain email: inf (35 samples)
+- a chain e-mail: 6.43 (52 samples)
+- a blog post: 1.67 (32 samples)
+- an email: 1.64 (29 samples)
+- a campaign mailer: 1.58 (49 samples)
+#### Statistical Significance
+- **Chi-Square Test:** χ² = 5572.96, p-value = 0.000017
+- **Result:** Context has a statistically significant association with the truth label (p < 0.05)
+
+## 3. Statement Field Analysis
+
+![Word Count Distribution](plots/4.4_word_count_distribution.png)
+
+### Common Words Analysis
+**Top 20 Words in Statements:**
+- says: 2955 occurrences
+- that: 2239 occurrences
+- has: 1566 occurrences
+- have: 1541 occurrences
+- than: 1397 occurrences
+- percent: 1209 occurrences
+- more: 1158 occurrences
+- was: 1144 occurrences
+- we: 1122 occurrences
+- from: 944 occurrences
+- as: 891 occurrences
+- state: 862 occurrences
+- not: 807 occurrences
+- it: 799 occurrences
+- our: 788 occurrences
+- obama: 769 occurrences
+- health: 739 occurrences
+- tax: 736 occurrences
+- he: 717 occurrences
+- people: 668 occurrences
+
+![Top Words](plots/4.4_top_words.png)
+
+## 4. Numerical Field Analysis
+
+### Speaker Truth History Features
+
+**Descriptive Statistics:**
+```
+       barely_true_counts  false_counts  half_true_counts  mostly_true_counts  pants_on_fire_counts
+count            12789.00      12789.00          12789.00            12789.00              12789.00
+mean                11.58         13.36             17.19               16.50                  6.25
+std                 18.98         24.14             35.85               36.17                 16.18
+min                  0.00          0.00              0.00                0.00                  0.00
+25%                  0.00          0.00              0.00                0.00                  0.00
+50%                  2.00          2.00              3.00                3.00                  1.00
+75%                 12.00         15.00             13.00               12.00                  5.00
+max                 70.00        114.00            160.00              163.00                105.00
+```
+
+![Truth History Boxplot](plots/4.4_truth_history_boxplot.png)
+
+### Speaker Credibility Analysis
+
+![Credibility Score Distribution](plots/4.4_credibility_score_distribution.png)
+
+**Correlation with Statement Truth:** 0.5481
+- There is a meaningful correlation between speaker credibility and statement truth label
+- Higher credibility scores are associated with TRUE statements
+
+## 5. Key Findings and Feature Recommendations
+
+### Key Findings from Field Analysis
+**Categorical Fields:**
+- **Subject** has a statistically significant association with truth label (p=0.000289)
+- **Speaker** has a statistically significant association with truth label (p=0.000000)
+- **Speaker Job** has a statistically significant association with truth label (p=0.000000)
+- **State** has a statistically significant association with truth label (p=0.000000)
+- **Party** has a statistically significant association with truth label (p=0.000000)
+- **Context** has a statistically significant association with truth label (p=0.000017)
+
+**Statement Field:**
+- TRUE statements are on average 1.1 words longer
+
+**Speaker Truth History:**
+- Speaker credibility (ratio of true to total statements) has a 0.5481 correlation with statement truth
+- Higher credibility scores tend to be associated with TRUE statements
+
+### Feature Engineering Recommendations
+**Categorical Features:**
+- Encode categorical variables with high cardinality using techniques like:
+  - Target encoding (replace categories with their mean target value)
+  - Frequency encoding (replace categories with their frequency)
+  - One-hot encoding for low-cardinality categorical variables
+- Create grouped categories for sparse categorical values
+
+**Statement Features:**
+- Extract text length features (character count, word count)
+- Create features for presence of specific keywords identified in analysis
+- Implement text preprocessing (lowercase, remove stopwords, stemming/lemmatization)
+- Consider TF-IDF or word embeddings for the statement text
+
+**Speaker History Features:**
+- Implement the credibility score (true statements / total statements)
+- Create features for the ratio of each truth category to total statements
+- Generate a weighted credibility score (giving higher weight to extreme categories)

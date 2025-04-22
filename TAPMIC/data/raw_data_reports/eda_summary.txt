@@ -1,0 +1,59 @@
+LIAR Dataset Exploratory Data Analysis Summary
+Generated on: 2025-04-21 23:31:21
+
+Dataset Information:
+- Train set: 10240 samples
+- Test set: 1267 samples
+- Validation set: 1284 samples
+- Total: 12791 samples
+
+Label Distribution:
+- half-true: 2627 samples
+- false: 2507 samples
+- mostly-true: 2454 samples
+- barely-true: 2103 samples
+- true: 2053 samples
+- pants-fire: 1047 samples
+
+Binary Label Distribution:
+- TRUE: 7134 samples
+- FALSE: 5657 samples
+- Class imbalance ratio: 1.26
+
+Missing Values Analysis:
+- Columns with null values: subject, speaker, speaker_job, state, party, barely_true_counts, false_counts, half_true_counts, mostly_true_counts, pants_on_fire_counts, context
+- No empty strings found
+
+Statement Statistics:
+- Mean statement length: 107.2 characters
+- Mean word count: 18.0 words
+
+Speaker Statistics:
+- Total unique speakers: 3309
+- Top speaker: barack-obama
+
+Preprocessing Recommendations:
+1. Missing Values in subject, speaker, speaker_job, state, party and context: These can be handled through RAG (Retrieval-Augmented Generation) by retrieving relevant information from trusted sources to fill in missing metadata.
+
+2. Count Columns Explanation:
+   - barely_true_counts: Number of 'barely true' statements previously made by the speaker
+   - false_counts: Number of 'false' statements previously made by the speaker
+   - half_true_counts: Number of 'half true' statements previously made by the speaker
+   - mostly_true_counts: Number of 'mostly true' statements previously made by the speaker
+   - pants_on_fire_counts: Number of 'pants on fire' (highly false) statements previously made by the speaker
+   These count columns represent the speaker's history of truthfulness and should be handled with appropriate imputation methods.
+
+3. Long Statements: Summarize long statements to fit within BERT base model token limits (512 tokens) using extractive or abstractive summarization techniques. This ensures compatibility with the BERT architecture while preserving the essential meaning of statements.
+
+4. Feature Extraction Ideas:
+   - Temporal Features:
+     * Extract dates/time references from statements and context
+     * Calculate time difference between statement date and referenced events
+     * Create seasonal indicators (election cycles, fiscal quarters)
+     * Track statement evolution on the same topic over time
+   - Additional Features:
+     * Speaker credibility score based on historical truthfulness
+     * Topic classification using keyword extraction
+     * Sentiment analysis of statements
+     * Complexity metrics (readability scores, vocabulary diversity)
+     * Named entity recognition to identify references to people, organizations, and locations

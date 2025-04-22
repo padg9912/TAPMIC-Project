@@ -1,0 +1,28 @@
+Claim Extraction Statistics - Generated on 2025-04-22 02:51:53
+Total claims extracted: 12791
+
+Distribution by truth label:
+  FALSE: 5657 claims (44.23%)
+  TRUE: 7134 claims (55.77%)
+
+Distribution by source:
+  train: 10240 claims (80.06%)
+  test: 1267 claims (9.91%)
+  validation: 1284 claims (10.04%)
+
+Top subjects:
+  health-care: 476 claims (3.72%)
+  taxes: 356 claims (2.78%)
+  education: 309 claims (2.42%)
+  elections: 304 claims (2.38%)
+  immigration: 303 claims (2.37%)
+  candidates-biography: 239 claims (1.87%)
+  economy: 170 claims (1.33%)
+  economy,jobs: 152 claims (1.19%)
+  federal-budget: 152 claims (1.19%)
+  guns: 152 claims (1.19%)
+
+Claim text statistics:
+  Average length: 106.66 characters
+  Maximum length: 3175 characters
+  Minimum length: 11 characters

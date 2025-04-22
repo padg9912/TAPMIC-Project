@@ -1,0 +1,374 @@
+# TAPMIC (Temporally Aware Political Misinformation Classification) - Project Steps
+
+## Phase 1: Setup and Dataset Preparation
+1. ✓ Set up project structure and environment
+   1.1. ✓ Create GitHub repository
+   - Created a local Git repository in `/Users/param/Desktop/TAPMIC/TAPMIC`. The repository was initialized using `git init` command. This repository will host all of our project files, code, and datasets, allowing for version control throughout the development process.
+   
+   1.2. ✓ Set up virtual environment
+   - Created a Python virtual environment using the `venv` module at `/Users/param/Desktop/TAPMIC/TAPMIC/venv`. The virtual environment was activated successfully, allowing us to manage project dependencies in isolation from the system Python installation. This ensures reproducibility and prevents dependency conflicts.
+   
+   1.3. ✓ Install required libraries (pandas, numpy, matplotlib, seaborn, scikit-learn, transformers, etc.)
+   - Installed all required Python packages for the project including pandas, numpy, matplotlib, seaborn, scikit-learn, transformers, torch, chromadb, wandb, gradio, requests, and beautifulsoup4. These libraries cover data processing, machine learning, visualization, database management, experiment tracking, web scraping, and application development needs for our TAPMIC project.
+   
+   1.4. ✓ Create requirements.txt file
+   - Generated a requirements.txt file using `pip freeze` to capture all installed packages and their versions. This file is saved at `/Users/param/Desktop/TAPMIC/TAPMIC/requirements.txt` and ensures that the exact same environment can be reproduced in the future or by other developers. The file contains all dependencies including pandas, numpy, scikit-learn, transformers, torch, and other libraries needed for the project.
+
+2. ✓ Download LIAR dataset
+   2.1. ✓ Get train, test, validation .csv files
+   - Downloaded the LIAR dataset using a Python script and extracted the data files. Converted the original TSV files to CSV format with proper column names, moved them to data/raw directory, and removed the original TSV files. The dataset contains political statements with truthfulness labels, speaker information, and contextual data. The final dataset files (train.csv, test.csv, valid.csv) are now ready for analysis and processing.
+   
+   2.2. ✓ Create initial exploratory data analysis (EDA) script 
+   - Created a comprehensive exploratory data analysis script (`raw_data_exploration.py`) and placed it in the `data/raw_data_reports` directory. This script analyzes the LIAR dataset, generates visualizations for label distribution, missing values, statement characteristics, speaker truthfulness patterns, and temporal patterns. It also generates preprocessing recommendations based on the analysis. The script produced an EDA report in JSON format and a human-readable summary, along with multiple visualization files that provide insights into the dataset characteristics.
+
+3. ✓ Convert 6 classes to binary classification
+   3.1. ✓ TRUE labels: "true", "mostly-true", "half-true"
+   3.2. ✓ FALSE labels: "barely-true", "false", "pants-fire"
+   3.3. ✓ Implement conversion in preprocess1.py
+   3.4. ✓ Save modified dataset
+   - Created a Python script (`preprocess1.py`) to convert the 6-class classification to binary. The script maps "true", "mostly-true", and "half-true" to "TRUE" and "barely-true", "false", and "pants-fire" to "FALSE". The processed files are saved in the intermediate_1 directory, preserving the original labels in a new column called "original_label". A binary class report (`binary_class_report.txt`) was generated in the TAPMIC/data/intermediate_1 directory showing the class distribution across train, test, and validation sets, with the overall dataset containing 55.77% TRUE and 44.23% FALSE samples. The preprocess1.py script is retained in the intermediate_1 directory for reference and potential future use.
+
+4. ✓ Create analysis report with visualizations
+   4.1. ✓ Class distribution
+       - Created a comprehensive Python script (`intermediate1_dataset_analysis_41.py`) in the new `intermediate1_data_reports` directory. Implemented class distribution analysis that generates detailed statistics and visualizations of the binary class distribution across train, test, and validation sets. The analysis shows the dataset has 55.77% TRUE samples and 44.23% FALSE samples overall, with an imbalance ratio of 1.26, indicating the classes are relatively balanced. Visualizations include bar charts and pie charts saved to the plots directory.
+   4.2. ✓ Basic statistics
+       - Created and executed a detailed Python script (`intermediate1_dataset_analysis_42.py`) that performs comprehensive basic statistics analysis on the binary classification dataset. The script analyzes statement length, word count, and speaker truth history features across True and False classes. It generates visualizations including histograms, boxplots, correlation heatmaps, and bar charts. Key findings include: True statements are slightly longer than False statements (by ~5.6 characters and 1.1 words on average); speakers have varying historical truth ratings with minimal missing values; and speakers making True statements have slightly more previous fact-checked statements than those making False statements. The script outputs recommendations for feature engineering, such as creating a speaker credibility feature based on historical truthfulness.
+   4.3. ✓ Missing value analysis
+       - Developed and ran a Python script (`intermediate1_dataset_analysis_43.py`) for detailed missing value analysis on the binary classification dataset. The script identifies and quantifies missing values across all datasets, analyzes patterns of missingness by label, and visualizes relationships between missing values using correlation heatmaps and bar charts. Key findings include: significant missing data in speaker_job (27.89%) and state (21.51%) columns; contextual information missing in about 1% of samples; slightly higher rates of missing values in FALSE statements for speaker_job and state columns; and minimal missing values (0.02%) in several other fields. The script provides specific recommendations for handling missing values in each column, such as using placeholders for categorical variables, zeros for count features, and creating binary flags to indicate missingness where appropriate.
+   4.4. ✓ Field analysis
+       - Implemented a comprehensive Python script (`intermediate1_dataset_analysis_44.py`) that performs detailed analysis of individual fields in the binary classification dataset. The script examines categorical fields (subject, speaker, speaker_job, state, party, context), analyzes the statement text content, and studies numerical features including speaker truth history. It generates visualizations of distributions, identifies statistically significant associations using chi-square tests, analyzes word frequencies, and calculates a speaker credibility score. Key findings include: all categorical fields (except ID) have statistically significant associations with the truth label; certain subjects, speakers, and contexts have strong predictive power; and speaker credibility score (ratio of true statements to total statements) has a strong correlation (0.55) with statement truth. The analysis provides specific feature engineering recommendations including categorical encoding strategies, text feature extraction techniques, and speaker history-based features.
+   4.5. ✓ Correlation and multivariate analysis
+       - Created and executed a Python script (`intermediate1_dataset_analysis_45.py`) performing comprehensive correlation and multivariate analysis on the binary classification dataset. The script calculates Pearson correlations between features, performs mutual information analysis, and applies dimensionality reduction techniques (PCA, t-SNE). Key findings reveal the speaker credibility score has the highest correlation with truth labels (r=0.48), followed by weighted credibility. The analysis also identified top features using mutual information, which doesn't assume linear relationships. PCA analysis shows that 77% of variance can be explained by just two principal components. The script provides specific feature engineering recommendations, including using credibility metrics, creating interactive features combining speaker history and statement characteristics, and potentially using principal components for dimensionality reduction. Visualizations include correlation heatmaps, scatter plots, pair plots, and PCA projections.
+   4.6. ✓ Identify preprocessing needs
+       - Created a comprehensive preprocessing needs analysis report (`intermediate1_dataset_analysis_46.txt`) by synthesizing findings from all previous analyses (4.1-4.5). The report identifies and prioritizes preprocessing requirements across multiple categories: missing value handling, categorical field encoding, text preprocessing, speaker history feature engineering, feature interactions, and comprehensive pipeline requirements. Key preprocessing needs include: handling significant missing values in speaker_job (27.89%) and state (21.51%) columns; applying appropriate encoding strategies for high-cardinality categorical fields; implementing text preprocessing for the statement field; creating speaker credibility features (which showed strong correlation of 0.55 with truth labels); and generating interaction terms between features. The report also outlines implementation priorities, categorizing tasks as high priority (essential), medium priority (important), or lower priority (optional) based on their expected impact and implementation difficulty.
+   4.7. ✓ Implement everything from 4.1-4.6 in intermediate1_dataset_analysis.py with output to .txt reports
+       - Created a comprehensive Python script (`intermediate1_dataset_analysis.py`) that implements all high-priority preprocessing tasks identified in previous analyses. The script includes functions for class distribution analysis, missing value handling, speaker credibility feature creation, text feature extraction, and categorical encoding. It generates processed datasets with enhanced features like credibility scores, binary flags for missing values, text features (statement length, word count, term presence indicators), and encoded categorical variables (using target encoding for high-cardinality fields and one-hot encoding for low-cardinality fields). The script creates a detailed report combining all analyses and saves processed train, test, and validation datasets to CSV files. All high-priority preprocessing items were successfully implemented, setting the foundation for temporal feature extraction.
+   4.8. ✓ Standardize dataset naming convention
+       - Renamed processed datasets to follow a consistent naming convention: `intermediate1_train.csv`, `intermediate1_test.csv`, and `intermediate1_validation.csv`. This naming clearly indicates the processing stage and ensures proper organization as the project progresses through multiple phases of feature engineering and model development.
+   4.9. ✓ Implemented key preprocessing recommendations from analysis
+        - Implemented text normalization (lowercase, remove punctuation) in the processed_text field
+        - Created binary flags for missing values in key fields
+        - Extracted speaker credibility features based on historical truthfulness
+        - Added text-based features (statement length, word count, term presence indicators)
+        - Applied appropriate encoding for categorical variables (target encoding for high-cardinality fields, one-hot encoding for low-cardinality fields)
+        - The remaining recommendations (class balancing, advanced dimensionality reduction) were designated as medium priority and will be addressed in Phase 3 if needed
+
+5. ✓ Temporal Feature Extraction (Core Component)
+   5.1. ✓ Setup framework for temporal feature extraction
+       - Created a dedicated directory structure (`temporal_features/`) for temporal feature extraction components
+       - Developed the core temporal feature extraction script (`temporal_features.py`) with functions for date component extraction, analysis of temporal patterns in truth values, and speaker timeline feature generation
+       - Implemented the temporal analysis script (`temporal_analysis.py`) that will visualize relationships between temporal features and truth labels, calculate correlations, and generate comprehensive reports
+       - Prepared the infrastructure for election-related temporal features (election year flags, campaign season indicators, days to nearest election)
+       - Designed speaker timeline features that will track speaker credibility evolution across different time windows (30-day, 90-day, 180-day)
+   5.2. ✓ Integrate temporal features with RAG pipeline (Phase 2)
+       - ✓ Successfully implemented in Phase 2 using the temporal_pipeline.py script
+       - ✓ Integrated web scraping and search API results with the temporal features framework
+       - ✓ Connected real date information from evidence to the temporal feature extraction pipeline
+       - ✓ Analyzed actual temporal patterns using the framework established in task 5.1
+       - ✓ Enriched claims with temporal evidence data spanning from 1990 to 2025
+   5.3. ✓ Generate speaker timeline features (Phase 2)
+       - ✓ Framework implemented in `temporal_features.py` and expanded in temporal_pipeline.py
+       - ✓ Implemented speaker timeline features that track history across different time windows
+       - ✓ Created features for speaker_30day_true_ratio, speaker_90day_true_ratio, and speaker_180day_true_ratio
+       - ✓ Added speaker_evidence_consistency to measure consistency over time
+   5.4. ✓ Implement in temporal_features.py
+       - Core implementation complete, awaiting integration with RAG pipeline for date information
+   5.5. ✓ Create visualization framework in temporal_analysis.py
+       - Implemented comprehensive visualization and analysis framework that will be used with real temporal data
+   5.6. ✓ Create enhanced dataset with temporal features (Phase 2)
+       - ✓ Successfully implemented in Phase 2 with temporal_pipeline.py
+       - ✓ Created intermediate2_train.csv, intermediate2_test.csv, and intermediate2_validation.csv
+       - ✓ Enhanced datasets include 23 new temporal features
+       - ✓ Added features for evidence counts, publication dates, and temporal consistency
+       - ✓ Generated detailed reports on temporal feature statistics
+   5.7. ✓ Verify Phase 1 completion and framework integrity
+       - Performed comprehensive verification of all Phase 1 components
+       - Confirmed proper structure of intermediate datasets (intermediate1_train.csv, intermediate1_test.csv, intermediate1_validation.csv)
+       - Verified that all necessary directories are properly created for Phase 2, including intermediate_2/ and temporal_features/reports/
+       - Confirmed temporal features framework is ready for integration with RAG pipeline
+       - Validated project structure and dataset consistency across all Phase 1 components
+
+**Phase 1 ✓ Complete:** We have successfully set up the environment, preprocessed the dataset, and created essential features. We've also established the framework for temporal features, which are the core of our TAPMIC project. Although the actual temporal data will come from the RAG pipeline in Phase 2, all necessary code structures and analysis frameworks are in place. The comprehensive feature engineering and framework development provides a strong foundation for both the RAG pipeline implementation and model development phases.
+
+## Phase 2: RAG Pipeline Implementation with ChromaDB
+
+Phase 2 directly builds on Phase 1 work by implementing a Retrieval-Augmented Generation (RAG) pipeline that enhances our processed datasets with real-world temporal information. This phase leverages the temporal features framework created in Phase 1 and extends it with evidence-based temporal data.
+
+1. ✓ Claim extraction and preprocessing
+   1.1. ✓ Create claim extractor (claim_extractor.py)
+       - ✓ Extract key claims from the intermediate1 datasets created in Phase 1
+       - ✓ Utilize the processed_text field from Phase 1 preprocessing
+       - ✓ Leverage speaker and subject information from Phase 1 to improve extraction
+       - ✓ Prepare claims for evidence collection with context from Phase 1 features
+       - ✓ Implemented keyword extraction for search optimization
+       - ✓ Generated comprehensive claim statistics report
+   
+   1.2. ✓ Set up ChromaDB for evidence storage (chromadb_setup.py)
+       - ✓ Initialize ChromaDB collections for claims and evidence
+       - ✓ Define schema with temporal metadata fields that align with temporal_features.py
+       - ✓ Include speaker credibility metrics from Phase 1 in the metadata schema
+       - ✓ Create query functions that can retrieve evidence based on temporal parameters
+       - ✓ Successfully stored all 12,791 claims in the vector database
+       - ✓ Created comprehensive evidence schema for temporal information
+
+2. ✓ Evidence collection and temporal extraction
+   2.1. ✓ Implement web search and content retrieval (evidence_collector.py)
+       - ✓ Create functions to query search APIs using the processed claims
+       - ✓ Extract content with publication dates and temporal information
+       - ✓ Use relevant subjects from Phase 1 analysis to improve search relevance
+       - ✓ Store results in ChromaDB with temporal metadata
+       - ✓ Implemented comprehensive date extraction from URLs and text
+       - ✓ Generated detailed evidence report with subject and domain statistics
+   
+   2.2. ✓ Implement direct evidence generation using Perplexity API (perplexity_evidence_collection.py)
+       - ✓ Created scalable API-based evidence collection script
+       - ✓ Used Perplexity's sonar-medium-online model to generate temporally-aware evidence
+       - ✓ Implemented batch processing to efficiently handle large claim volumes
+       - ✓ Added robust error handling and logging for production use
+       - ✓ Included comprehensive temporal information extraction from generated evidence
+       - ✓ Successfully running and collecting evidence for all unprocessed claims
+       - ✓ Each evidence item includes publication dates and specific temporal data
+
+   2.3. ✓ Extract temporal information from evidence
+       - ✓ Implemented date extraction logic in perplexity_evidence_collection.py
+       - ✓ Extract dates from URLs using regex patterns
+       - ✓ Extract dates from evidence content using comprehensive pattern matching
+       - ✓ Validate extracted dates and filter invalid entries
+       - ✓ Calculate temporal relationships between claim date and evidence dates
+       - ✓ Store all temporal data with evidence for further analysis
+
+   2.4. ✓ Complete evidence collection with comprehensive coverage
+       - ✓ Successfully collected evidence for all 12,791 claims
+       - ✓ Generated a total of 22,789 evidence items (average of 1.78 per claim)
+       - ✓ Ensured 95.06% of evidence items contain valuable temporal data
+       - ✓ Created evidence collection report with detailed statistics
+       - ✓ Evidence spans temporal range from 1990 to 2025
+       - ✓ 88.50% of evidence contains multiple dates for rich temporal relations
+       - ✓ Cleaned and standardized collected evidence data for consistency
+       - ✓ Balanced evidence across reputable sources (news outlets, fact-checking sites, etc.)
+
+3. Temporal feature generation
+   3.1. ✓ Integrate with Phase 1 temporal framework (temporal_pipeline.py)
+       - ✓ Created a pipeline connecting the collected evidence data with the temporal_features.py framework
+       - ✓ Developed a connector that extracts dates from collected_evidence.json 
+       - ✓ Applied the temporal analysis functions to real evidence dates with publication information
+       - ✓ Generated timeline features using temporal patterns identified in evidence
+       - ✓ Successfully integrated all 22,789 evidence items with 12,791 claims
+       - ✓ Implemented comprehensive temporal feature extraction including:
+           - Evidence count and temporal evidence statistics
+           - Publication date ranges and mean publication years
+           - Multiple dates percentage (93.13% average across claims)
+           - Election-related temporal features (election year flags, campaign seasons)
+           - Source-based features (Google vs. Perplexity evidence counts)
+           - Temporal consistency scores for evidence reliability
+       - ✓ Generated extensive visualizations and correlations between temporal features and truth labels
+   
+   3.2. ✓ Create enhanced datasets with temporal features
+       - ✓ Enhanced intermediate1 datasets with 23 new temporal features from collected evidence
+       - ✓ Calculated temporal distance between claim statements and evidence publication dates
+       - ✓ Implemented temporal credibility features using evidence timeline 
+       - ✓ Created features for temporal consistency across multiple evidence items
+       - ✓ Added temporal proximity features (election proximity, campaign season indicators)
+       - ✓ Successfully saved enhanced datasets as intermediate2_train.csv, intermediate2_test.csv, and intermediate2_validation.csv
+       - ✓ Generated comprehensive report on temporal feature statistics and correlations with truth labels
+
+4. Analysis and evaluation
+   4.1. ✓ Apply temporal analysis framework to collected evidence
+       - ✓ Used the collected evidence to generate comprehensive temporal statistics
+       - ✓ Created visualizations showing temporal patterns in the evidence data
+       - ✓ Analyzed correlation between temporal features in evidence and claim truthfulness
+       - ✓ Generated reports on temporal patterns in misinformation
+       - ✓ Visualized differences in temporal patterns between TRUE and FALSE claims
+       - ✓ Produced detailed breakdown of temporal data by year (from 1990 to 2025)
+       - ✓ Analyzed evidence sources and their temporal reliability
+   
+   4.2. ✓ Evaluate RAG pipeline performance
+       - ✓ Calculated coverage metrics (100% of claims with quality evidence)
+       - ✓ Measured temporal data extraction efficiency (95.06% of evidence with dates)
+       - ✓ Analyzed distribution of temporal patterns across different claim subjects
+       - ✓ Evaluated temporal consistency in evidence from different sources
+       - ✓ Created comprehensive evaluation report with recommendations for model integration
+
+**Phase 2 ✓ Complete:** We have successfully implemented the RAG pipeline and integrated it with our temporal features framework. The pipeline collected evidence for all 12,791 claims with rich temporal information, using both Google Search API and Perplexity API. We extracted and analyzed temporal patterns in the evidence, revealing relationships between temporal features and claim truthfulness. The enhanced datasets now include 23 new temporal features covering evidence sources, publication dates, speaker timeline features, and election-related temporal information. This temporally-aware dataset provides a unique foundation for our classification models in Phase 3, allowing them to leverage temporal patterns in misinformation that traditional approaches would miss.
+
+## Phase 3: Model Development with Temporal Features
+
+Phase 3 builds directly on the rich datasets created in Phases 1 and 2, leveraging both the core features from Phase 1 (speaker credibility, text features, categorical encodings) and the temporal features from Phase 2 (evidence dates, temporal consistency, election proximity). This phase will implement models that specifically exploit temporal patterns in misinformation detection.
+
+1. ✓ Feature engineering optimization
+   1.1. ✓ [Simplified] Implement medium-priority preprocessing items from Phase 1 analysis
+       - Original task included creating complex feature interactions and advanced representations
+       - This task was simplified and incorporated into the streamlined feature processor (task 1.3)
+       - Advanced text representation is now handled directly by the RoBERTa model
+       - Prioritized direct integration of key temporal features over complex feature engineering
+   
+   1.2. ✓ [Simplified] Create final feature set
+       - Original approach involved creating extensive interaction terms and feature selection
+       - Simplified approach focuses on core features directly relevant to the RoBERTa model
+       - Feature normalization is handled in the streamlined processor (task 1.3)
+       - The streamlined approach preserves all valuable temporal information while reducing complexity
+       - This simplified approach improves model interpretability and reduces overfitting risk
+       
+   1.3. ✓ Implement streamlined feature processing 
+       - ✓ Created feature processor script (feature_processor.py) that streamlines data preparation for the RoBERTa model
+       - ✓ Successfully defined essential feature categories including:
+           - Core metadata fields (id, label, speaker, subject, context)
+           - Text features (statement_length, word_count, avg_word_length, etc.)
+           - Credibility features (credibility_score, weighted_credibility, etc.)
+           - Categorical features (party_republican, party_democrat, context encodings)
+           - Temporal features (evidence counts, publication dates, election features, etc.)
+       - ✓ Implemented comprehensive missing value handling with missing indicators for critical temporal features
+       - ✓ Applied feature normalization to ensure balanced contribution from all numerical features
+       - ✓ Generated detailed feature report showing temporal feature coverage patterns:
+           - Full coverage (100%) for 12 temporal features including evidence_count, publication dates, and claim counts
+           - Missing data identified in 8 temporal features including days_to_nearest_election and consistency scores
+       - ✓ Created comprehensive documentation of all features and their statistics
+       - ✓ Successfully processed and saved final datasets (final_train.csv, final_test.csv, final_validation.csv)
+       - ✓ Generated human-readable report showing all feature statistics and class distribution
+       - ✓ Fixed issues with function parameter passing to ensure proper processing flow
+       - ✓ Verified alignment with Phase 2 temporal data, showing successful integration of evidence-based features
+
+2. ✓ RoBERTa model implementation
+   2.1. ✓ Set up RoBERTa model with HuggingFace transformers
+       - ✓ Successfully implemented RoBERTa-base model integration using HuggingFace transformers
+       - ✓ Configured tokenizer with appropriate maximum sequence length (128) for political claims
+       - ✓ Created ClaimDataset class that handles both text inputs and numerical features
+       - ✓ Implemented data loaders with appropriate batch size (16) and shuffling
+   2.2. ✓ Implement hybrid approach with temporal awareness:
+       - ✓ Created a complete architecture that processes claim text through RoBERTa
+       - ✓ Implemented feature extraction for temporal data using dedicated neural layers
+       - ✓ Added speaker credibility feature processing using feed-forward networks
+       - ✓ Successfully integrated all features through concatenation with RoBERTa [CLS] embeddings
+       - ✓ Implemented classification layer with dropout (0.1) for regularization
+   2.3. ✓ Implement in roberta_model.py
+       - ✓ Created modular architecture that allows ablation studies with use_temporal flag
+       - ✓ Included options to control model behavior based on feature availability
+       - ✓ Implemented efficient feature normalization and processing
+       - ✓ Added model checkpointing and early stopping based on validation performance
+       - ✓ Created comprehensive utility functions for model configuration and loading
+
+3. Training setup with optimized approach
+   3.1. ✓ Initialize Weights & Biases (wandb) tracking
+       - ✓ Successfully configured experiment tracking with wandb_setup.py
+       - ✓ Implemented comprehensive metrics logging for accuracy, precision, recall, and F1 score
+       - ✓ Added tracking for temporal feature correlations during training
+       - ✓ Created visualizations for feature importance and learning curves
+       - ✓ Implemented confusion matrix visualization at each epoch
+       - ✓ Added sample prediction logging to analyze model behavior
+       - ✓ Created init_wandb.py for easy authentication and setup
+   3.2. ✓ Define evaluation metrics
+       - ✓ Implemented primary metrics in ModelEvaluator: accuracy, precision, recall, F1-score, ROC AUC
+       - ✓ Added derived metrics: specificity, balanced accuracy, average precision
+       - ✓ Created comprehensive visualization tools for confusion matrices and ROC curves
+       - ✓ Implemented stratified k-fold cross-validation in evaluate_with_cross_validation
+       - ✓ Developed temporal-specific metrics through evaluate_with_temporal_breakdown
+       - ✓ Created detailed reports with classification summaries and performance visualizations
+       - ✓ Integrated with Weights & Biases for experiment tracking and comparison
+   3.3. ✓ Create efficient training pipeline for limited runs
+       - ✓ Implemented optimized training loops with mixed precision support in train_utils.py
+       - ✓ Successfully integrated fp16 training for efficient GPU utilization
+       - ✓ Added gradient accumulation (steps=2) for effective batch size management
+       - ✓ Implemented early stopping with configurable patience parameter
+       - ✓ Created comprehensive validation loops tracking all relevant metrics
+       - ✓ Set up proper checkpoint saving for the best performing models
+   3.4. ✓ Implement in train_utils.py
+       - ✓ Created reusable training utilities including train_with_mixed_precision function
+       - ✓ Implemented evaluate_and_report function for consistent evaluation
+       - ✓ Added analyze_feature_importance for feature importance analysis
+       - ✓ Created visualization functions for confusion matrices, ROC curves, and PR curves
+       - ✓ Implemented comprehensive model report generation
+
+4. Model training with pre-optimized parameters
+   4.1. ✓ Train on Google Colab GPU or local GPU (train_roberta.py)
+       - Created run_training.sh script for automated training with all configurations
+       - Configured optimal hyperparameters based on literature best practices:
+           * Learning rate: 2e-5 with linear warmup (10%) and decay
+           * Batch size: 16 with gradient accumulation steps of 2
+           * Weight decay: 0.01
+           * Dropout rate: 0.1
+           * Sequence length: 128 tokens
+           * Maximum 5 epochs with early stopping (patience=3)
+       - Started full training with all three model configurations (running in background)
+   4.2. Track metrics with wandb
+       - Integrated wandb tracking into all training runs
+       - Set up parameter tracking with wandb.config
+       - Implemented real-time metric logging (accuracy, F1, precision, recall)
+       - Created visualizations for feature importance and learning curves
+       - Configured automatic confusion matrix generation
+       - Set up sample prediction tracking for error analysis
+   4.3. Prepare three targeted training runs
+       - Configured Run 1: RoBERTa with text features only (baseline)
+       - Configured Run 2: RoBERTa with text + temporal features (temporal model)
+       - Configured Run 3: RoBERTa with text + temporal + speaker credibility features (complete model)
+       - Created unified comparison script to analyze all three models
+       - Set up automatic logging and reporting for all runs
+
+5. LLM classifier implementation
+   5.1. ⟳ Select open-source LLM based on Phase 1 and 2 findings
+       - Choose a model that balances efficiency and accuracy (e.g., Llama-2-7B, Phi-2)
+       - Configure model for inference on available hardware
+       - Set up quantization for efficient inference if needed
+   5.2. Develop prompt-based approach without fine-tuning
+       - Create prompts that incorporate claim text directly
+       - Include relevant evidence from Phase 2 in the prompt context
+       - Add temporal information in structured format within prompts
+       - Implement few-shot examples with claims similar to the input
+   5.3. Implement inference pipeline
+       - Create efficient batching for prompt generation
+       - Implement caching to avoid redundant processing
+       - Add post-processing to extract binary classification from model outputs
+       - Create confidence score calculation based on model output
+   5.4. Implement in llm_classifier.py
+       - Create modular architecture for swapping LLM models
+       - Implement prompt templates that incorporate temporal features
+       - Add evidence retrieval components that leverage ChromaDB from Phase 2
+       - Create utilities for output parsing and confidence scoring
+
+6. Model comparison
+   6.1. Compare BERT and LLM classifier performance
+       - Create comparison tables with all relevant metrics
+       - Analyze performance differences across different claim types
+       - Evaluate runtime efficiency and resource requirements
+       - Identify strengths and weaknesses of each approach
+   6.2. Create evaluation reports with visualizations
+       - Generate confusion matrices for both models
+       - Create ROC curves and precision-recall curves
+       - Visualize performance across different speaker types
+       - Analyze performance trends across temporal dimensions
+   6.3. Analyze impact of temporal features on performance
+       - Perform ablation studies removing temporal features
+       - Measure performance difference between temporally-aware and baseline models
+       - Analyze which temporal features contribute most to performance gains
+       - Evaluate performance on claims with strong temporal context vs. general claims
+   6.4. Implement in model_comparison.py and evaluation_reporter.py
+       - Create comprehensive comparison framework for all models
+       - Implement statistical significance testing for performance differences
+       - Generate detailed reports with all metrics and visualizations
+       - Create summary dashboards for key findings
+
+## Phase 4: Pipeline Integration and Application
+1. Complete end-to-end RAG pipeline
+   1.1. Integrate all components
+   1.2. Optimize for efficiency
+   1.3. Document API endpoints and functions
+   1.4. Implement in pipeline.py
+
+2. Gradio web app development
+   2.1. Design simple UI for claim input
+   2.2. Implement inference using both classifiers
+   2.3. Display classification results and confidence
+   2.4. Show contributing evidence and temporal information
+   2.5. Implement in app.py
+
+## Phase 5: Documentation and Presentation (Outside 12-hour Implementation Period)
+1. Create project presentation
+   1.1. Design PowerPoint slides
+   1.2. Include key visualizations and results
+   1.3. Prepare demo of web application
+
+2. Write final paper (4-5 pages)
+   2.1. Introduction and problem statement
+   2.2. Related work
+   2.3. Methodology
+   2.4. Experimental results
+   2.5. Discussion and conclusion

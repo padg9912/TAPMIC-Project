@@ -1,0 +1,366 @@
+# Comprehensive Binary Classification Dataset Analysis
+Generated on: 2025-04-22 01:49:42
+
+This report includes analysis and preprocessing of the binary classification dataset.
+
+# 4.1 Binary Class Distribution Analysis
+Generated on: 2025-04-22 01:49:28
+
+## Binary Class Distribution
+
+### Train Set
+- True: 4488 samples (43.83%)
+- False: 5752 samples (56.17%)
+- Total: 10240 samples
+
+### Test Set
+- True: 553 samples (43.65%)
+- False: 714 samples (56.35%)
+- Total: 1267 samples
+
+### Validation Set
+- True: 616 samples (47.98%)
+- False: 668 samples (52.02%)
+- Total: 1284 samples
+
+### Overall Set
+- True: 5657 samples (44.23%)
+- False: 7134 samples (55.77%)
+- Total: 12791 samples
+
+### Class Imbalance Analysis
+- Majority class: False with 7134 samples
+- Minority class: True with 5657 samples
+- Imbalance ratio (majority:minority): 1.26
+- **Note**: Class distribution is relatively balanced (imbalance ratio < 1.5)
+
+![Binary Class Distribution](plots/4.1_binary_class_distribution.png)
+
+![Binary Class Distribution - Pie Charts](plots/4.1_binary_class_distribution_pie.png)
+
+
+# 4.3 Missing Value Analysis and Handling
+Generated on: 2025-04-22 01:49:31
+
+## 1. Overall Missing Value Summary
+
+### Missing Value Counts and Percentages
+
+```
+                      Train Missing  Train Missing %  Test Missing  Test Missing %  Valid Missing  Valid Missing %  Combined Missing  Combined Missing %
+speaker_job                    2898            28.30           325           25.65            345            26.87              3568               27.89
+state                          2210            21.58           262           20.68            279            21.73              2751               21.51
+context                         102             1.00            17            1.34             12             0.93               131                1.02
+subject                           2             0.02             0            0.00              0             0.00                 2                0.02
+speaker                           2             0.02             0            0.00              0             0.00                 2                0.02
+party                             2             0.02             0            0.00              0             0.00                 2                0.02
+barely_true_counts                2             0.02             0            0.00              0             0.00                 2                0.02
+false_counts                      2             0.02             0            0.00              0             0.00                 2                0.02
+half_true_counts                  2             0.02             0            0.00              0             0.00                 2                0.02
+mostly_true_counts                2             0.02             0            0.00              0             0.00                 2                0.02
+pants_on_fire_counts              2             0.02             0            0.00              0             0.00                 2                0.02
+```
+
+### Columns with Missing Values
+
+- **speaker_job**: 3568.0 values (27.89%) missing in the combined dataset
+- **state**: 2751.0 values (21.51%) missing in the combined dataset
+- **context**: 131.0 values (1.02%) missing in the combined dataset
+- **subject**: 2.0 values (0.02%) missing in the combined dataset
+- **speaker**: 2.0 values (0.02%) missing in the combined dataset
+- **party**: 2.0 values (0.02%) missing in the combined dataset
+- **barely_true_counts**: 2.0 values (0.02%) missing in the combined dataset
+- **false_counts**: 2.0 values (0.02%) missing in the combined dataset
+- **half_true_counts**: 2.0 values (0.02%) missing in the combined dataset
+- **mostly_true_counts**: 2.0 values (0.02%) missing in the combined dataset
+- **pants_on_fire_counts**: 2.0 values (0.02%) missing in the combined dataset
+
+## 2. Missing Values by Label
+
+```
+                      True Missing  True Missing %  False Missing  False Missing %
+speaker_job                   1811           25.39           1757            31.06
+state                         1329           18.63           1422            25.14
+context                         72            1.01             59             1.04
+subject                          0            0.00              2             0.04
+speaker                          0            0.00              2             0.04
+party                            0            0.00              2             0.04
+barely_true_counts               0            0.00              2             0.04
+false_counts                     0            0.00              2             0.04
+half_true_counts                 0            0.00              2             0.04
+mostly_true_counts               0            0.00              2             0.04
+pants_on_fire_counts             0            0.00              2             0.04
+```
+
+![Missing Values by Label](plots/4.3_missing_values_by_label.png)
+
+### Analysis of Missing Values by Label
+
+- **speaker_job**: Missing values are 5.67% more common in FALSE statements
+- **state**: Missing values are 6.51% more common in FALSE statements
+
+## 3. Missing Value Patterns
+
+![Missing Value Correlation](plots/4.3_missing_value_correlation.png)
+
+![Missing Value Percentage](plots/4.3_missing_value_percentage.png)
+
+
+## 4. Missing Value Handling Implementation
+
+### Column-Specific Handling Strategies
+
+#### Train Dataset Processing
+- Created binary flag feature 'speaker_job_missing' to indicate missing values
+- Created binary flag feature 'state_missing' to indicate missing values
+- Filled 2 missing values in 'subject' with most common value: 'health-care'
+- Filled 2 missing values in 'speaker' with 'UNKNOWN'
+- Filled 2898 missing values in 'speaker_job' with 'UNKNOWN'
+- Filled 2210 missing values in 'state' with 'UNKNOWN'
+- Filled 2 missing values in 'party' with 'UNKNOWN'
+- Filled 2 missing values in 'barely_true_counts' with 0
+- Filled 2 missing values in 'false_counts' with 0
+- Filled 2 missing values in 'half_true_counts' with 0
+- Filled 2 missing values in 'mostly_true_counts' with 0
+- Filled 2 missing values in 'pants_on_fire_counts' with 0
+- Filled 102 missing values in 'context' with 'UNKNOWN'
+
+#### Test Dataset Processing
+- Created binary flag feature 'speaker_job_missing' to indicate missing values
+- Created binary flag feature 'state_missing' to indicate missing values
+- Filled 325 missing values in 'speaker_job' with 'UNKNOWN'
+- Filled 262 missing values in 'state' with 'UNKNOWN'
+- Filled 17 missing values in 'context' with 'UNKNOWN'
+
+#### Validation Dataset Processing
+- Created binary flag feature 'speaker_job_missing' to indicate missing values
+- Created binary flag feature 'state_missing' to indicate missing values
+- Filled 345 missing values in 'speaker_job' with 'UNKNOWN'
+- Filled 279 missing values in 'state' with 'UNKNOWN'
+- Filled 12 missing values in 'context' with 'UNKNOWN'
+
+### Summary of Missing Value Handling
+- Created binary flags for columns with significant missing values (speaker_job, state)
+- Filled categorical missing values with 'UNKNOWN' placeholder
+- Filled truth history missing values with 0
+- Filled subject missing values with the most common value
+
+# Speaker Credibility Feature Engineering
+Generated on: 2025-04-22 01:49:34
+
+## Speaker Credibility Features
+
+Creating speaker credibility features based on historical truth data:
+
+### Train Dataset Processing
+Created features:
+- `total_statements`: Total historical statements by speaker
+- `truth_statements`: Total TRUE, MOSTLY-TRUE, and HALF-TRUE statements
+- `lie_statements`: Total FALSE, BARELY-TRUE, and PANTS-ON-FIRE statements
+- `credibility_score`: Ratio of truth statements to total statements
+- `weighted_credibility`: Weighted credibility score with different weights per category
+- `truth_history_std`: Standard deviation of truth history, indicating consistency
+
+### Test Dataset Processing
+Created features:
+- `total_statements`: Total historical statements by speaker
+- `truth_statements`: Total TRUE, MOSTLY-TRUE, and HALF-TRUE statements
+- `lie_statements`: Total FALSE, BARELY-TRUE, and PANTS-ON-FIRE statements
+- `credibility_score`: Ratio of truth statements to total statements
+- `weighted_credibility`: Weighted credibility score with different weights per category
+- `truth_history_std`: Standard deviation of truth history, indicating consistency
+
+### Validation Dataset Processing
+Created features:
+- `total_statements`: Total historical statements by speaker
+- `truth_statements`: Total TRUE, MOSTLY-TRUE, and HALF-TRUE statements
+- `lie_statements`: Total FALSE, BARELY-TRUE, and PANTS-ON-FIRE statements
+- `credibility_score`: Ratio of truth statements to total statements
+- `weighted_credibility`: Weighted credibility score with different weights per category
+- `truth_history_std`: Standard deviation of truth history, indicating consistency
+
+## Correlation with Truth Label
+
+- **credibility_score**: 0.5422
+- **weighted_credibility**: 0.4280
+- **truth_statements**: 0.0843
+- **truth_history_std**: 0.0216
+- **total_statements**: 0.0206
+- **lie_statements**: -0.0692
+
+![Speaker Credibility Correlation](plots/speaker_credibility_correlation.png)
+
+![Credibility vs Truth](plots/credibility_vs_truth_scatter.png)
+
+## Summary of Speaker Credibility Features
+
+The speaker credibility features show strong correlation with the truth label:
+- `credibility_score` has 0.5422 correlation with truth
+- `weighted_credibility` has 0.4280 correlation with truth
+These features capture the historical truthfulness of speakers and are strong predictors of statement veracity.
+
+# Text Preprocessing and Feature Extraction
+Generated on: 2025-04-22 01:49:36
+
+## Text Feature Engineering
+
+### Train Dataset Text Processing
+Created basic text features:
+- `statement_length`: Character count of statement
+- `word_count`: Number of words in statement
+- `avg_word_length`: Average length of words in statement
+- `processed_text`: Lowercase, punctuation-free version of statement
+- Term presence indicators for common terms
+- `contains_number`: Whether statement contains numeric values
+- `question_mark_count`: Number of question marks in statement
+- `exclamation_mark_count`: Number of exclamation marks in statement
+
+### Test Dataset Text Processing
+Created basic text features:
+- `statement_length`: Character count of statement
+- `word_count`: Number of words in statement
+- `avg_word_length`: Average length of words in statement
+- `processed_text`: Lowercase, punctuation-free version of statement
+- Term presence indicators for common terms
+- `contains_number`: Whether statement contains numeric values
+- `question_mark_count`: Number of question marks in statement
+- `exclamation_mark_count`: Number of exclamation marks in statement
+
+### Validation Dataset Text Processing
+Created basic text features:
+- `statement_length`: Character count of statement
+- `word_count`: Number of words in statement
+- `avg_word_length`: Average length of words in statement
+- `processed_text`: Lowercase, punctuation-free version of statement
+- Term presence indicators for common terms
+- `contains_number`: Whether statement contains numeric values
+- `question_mark_count`: Number of question marks in statement
+- `exclamation_mark_count`: Number of exclamation marks in statement
+
+## Correlation of Text Features with Truth Label
+
+- **contains_number**: 0.1136
+- **contains_percent**: 0.0824
+- **word_count**: 0.0549
+- **statement_length**: 0.0438
+- **contains_million**: 0.0375
+- **contains_billion**: -0.0022
+- **contains_tax**: -0.0024
+- **question_mark_count**: -0.0083
+- **exclamation_mark_count**: -0.0244
+- **contains_government**: -0.0325
+- **contains_president**: -0.0498
+- **contains_says**: -0.0511
+- **avg_word_length**: -0.0530
+- **contains_obama**: -0.0635
+
+![Text Features Correlation](plots/text_features_correlation.png)
+
+## Summary of Text Feature Engineering
+
+Top text features by correlation magnitude:
+- `contains_number`: 0.1136
+- `contains_percent`: 0.0824
+- `contains_obama`: -0.0635
+- `word_count`: 0.0549
+- `avg_word_length`: -0.0530
+
+These text features capture important characteristics of statements that are associated with truthfulness.
+
+# Categorical Feature Encoding
+Generated on: 2025-04-22 01:49:38
+
+## Categorical Feature Encoding
+
+### Categorical Field Cardinality
+
+- **context**: 5143 unique values
+- **subject**: 4534 unique values
+- **speaker**: 3310 unique values
+- **speaker_job**: 1355 unique values
+- **state**: 85 unique values
+- **party**: 25 unique values
+
+### High Cardinality Encoding (Target Encoding)
+
+- Applied target encoding to 'subject' -> 'subject_target_encoded'
+- Applied target encoding to 'speaker' -> 'speaker_target_encoded'
+- Applied target encoding to 'speaker_job' -> 'speaker_job_target_encoded'
+- Applied target encoding to 'context' -> 'context_target_encoded'
+
+### Low Cardinality Encoding (One-Hot Encoding)
+
+- Applied one-hot encoding to 'party' -> 25 binary features
+
+### Special Predictive Category Features
+
+- Created binary feature 'speaker_high_credibility' for categories: kasim-reed, dennis-kucinich, bill-nelson, rob-portman, cory-booker
+- Created binary feature 'speaker_low_credibility' for categories: chain-email, viral-image, blog-posting, democratic-congressional-campaign-committee, ben-carson
+- Created binary feature 'context_formal_context' for categories: the State of the Union address, comments on CNN's "State of the Union", a newspaper column, a letter, an interview on MSNBC
+- Created binary feature 'context_informal_context' for categories: a chain email, a chain e-mail, a blog post, an email, a campaign mailer
+
+## Correlation of Encoded Features with Truth Label
+
+### Top Positive Correlations (indicative of TRUE statements)
+- **context_target_encoded**: 0.5878
+- **subject_target_encoded**: 0.5469
+- **speaker_target_encoded**: 0.5359
+- **weighted_credibility**: 0.4280
+- **speaker_job_target_encoded**: 0.3549
+- **party_democrat**: 0.1432
+- **speaker_high_credibility**: 0.0563
+- **context_formal_context**: 0.0533
+- **party_independent**: 0.0342
+- **party_state-official**: 0.0313
+
+### Top Negative Correlations (indicative of FALSE statements)
+- **speaker_low_credibility**: -0.1456
+- **party_republican**: -0.1000
+- **state_missing**: -0.0787
+- **context_informal_context**: -0.0778
+- **party_none**: -0.0575
+- **party_organization**: -0.0213
+- **party_talk-show-host**: -0.0184
+- **party_constitution-party**: -0.0172
+- **party_UNKNOWN**: -0.0140
+- **party_ocean-state-tea-party-action**: -0.0099
+
+![Encoded Features Correlation](plots/encoded_features_correlation.png)
+
+## Summary of Categorical Encoding
+
+- **Target Encoding**: Applied to high-cardinality fields (subject, speaker, speaker_job, context)
+- **One-Hot Encoding**: Applied to low-cardinality fields (state, party)
+- **Special Features**: Created binary features for predictive category groups
+
+These encoding strategies reduce dimensionality while preserving the predictive power of categorical fields.
+
+
+## Preprocessing Summary
+
+The following preprocessing steps have been implemented:
+
+1. **Missing Value Handling**:
+   - Created binary flags for high-missing columns (speaker_job, state)
+   - Filled categorical missing values with 'UNKNOWN'
+   - Filled numeric truth history missing values with 0
+
+2. **Speaker Credibility Features**:
+   - Created credibility_score (truth statements / total statements)
+   - Created weighted_credibility with category-specific weights
+   - Generated aggregated truth and lie counts
+
+3. **Text Feature Engineering**:
+   - Created basic text features (length, word count, avg word length)
+   - Created term presence indicators for common terms
+   - Added features for syntactic patterns (question marks, numbers)
+
+4. **Categorical Encoding**:
+   - Applied target encoding to high-cardinality fields
+   - Applied one-hot encoding to low-cardinality fields
+   - Created special binary features for predictive category groups
+
+The processed datasets have been saved to:
+- Train: /Users/param/Desktop/TAPMIC/TAPMIC/data/intermediate_1/processed_train.csv
+- Test: /Users/param/Desktop/TAPMIC/TAPMIC/data/intermediate_1/processed_test.csv
+- Validation: /Users/param/Desktop/TAPMIC/TAPMIC/data/intermediate_1/processed_validation.csv

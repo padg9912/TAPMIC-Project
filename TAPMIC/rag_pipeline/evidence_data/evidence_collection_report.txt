@@ -1,0 +1,94 @@
+=== EVIDENCE COLLECTION REPORT ===
+Generated on: 2025-04-22 11:37:43
+
+=== GENERAL STATISTICS ===
+Total evidence items: 22789
+Total claims covered: 12791
+Average evidence per claim: 1.78
+
+=== EVIDENCE SOURCES ===
+Perplexity API generated: 4294 items (18.84%)
+Fast-generated: 0 items (0.00%)
+Other sources: 18495 items (81.16%)
+
+=== TEMPORAL DATA ===
+Items with publication dates: 21664 (95.06%)
+Items with multiple dates: 20168 (88.50%)
+Items with any temporal data: 21664 (95.06%)
+Date range: 1990 to 2025
+
+=== DATE DISTRIBUTION BY YEAR ===
+  1990: 2 items (0.01%)
+  1991: 1 items (0.00%)
+  1992: 3 items (0.01%)
+  1993: 2 items (0.01%)
+  1994: 1 items (0.00%)
+  1995: 1 items (0.00%)
+  1996: 1 items (0.00%)
+  1997: 1 items (0.00%)
+  1998: 7 items (0.03%)
+  1999: 1 items (0.00%)
+  2000: 4 items (0.02%)
+  2001: 12 items (0.06%)
+  2002: 2 items (0.01%)
+  2003: 4 items (0.02%)
+  2004: 14 items (0.06%)
+  2005: 8 items (0.04%)
+  2006: 20 items (0.09%)
+  2007: 34 items (0.16%)
+  2008: 87 items (0.40%)
+  2009: 39 items (0.18%)
+  2010: 82 items (0.38%)
+  2011: 133 items (0.61%)
+  2012: 168 items (0.78%)
+  2013: 100 items (0.46%)
+  2014: 137 items (0.63%)
+  2015: 155 items (0.72%)
+  2016: 2903 items (13.40%)
+  2017: 2869 items (13.24%)
+  2018: 2887 items (13.33%)
+  2019: 2836 items (13.09%)
+  2020: 2898 items (13.38%)
+  2021: 2942 items (13.58%)
+  2022: 2798 items (12.92%)
+  2023: 127 items (0.59%)
+  2024: 225 items (1.04%)
+  2025: 160 items (0.74%)
+
+=== TEMPORAL DATA BY SOURCE ===
+  google_generated: 17424/18495 items with temporal data (94.21%)
+  perplexity_generated: 4240/4294 items with temporal data (98.74%)
+
+=== TOP DOMAINS ===
+  www.politifact.com: 1592 items (6.99%)
+  www.presidency.ucsb.edu: 1398 items (6.13%)
+  www.npr.org: 1379 items (6.05%)
+  en.wikipedia.org: 1376 items (6.04%)
+  www.factcheck.org: 1376 items (6.04%)
+  www.congress.gov: 1375 items (6.03%)
+  www.nytimes.com: 1361 items (5.97%)
+  www.washingtonpost.com: 1339 items (5.88%)
+  www.foxnews.com: 1336 items (5.86%)
+  www.bbc.com: 1329 items (5.83%)
+  www.wsj.com: 1324 items (5.81%)
+  www.reuters.com: 1286 items (5.64%)
+  www.apnews.com: 1286 items (5.64%)
+  www.cnn.com: 1264 items (5.55%)
+  www.usatoday.com: 1233 items (5.41%)
+
+=== TOP SUBJECTS ===
+  health-care: 835 items (3.66%)
+  taxes: 644 items (2.83%)
+  immigration: 559 items (2.45%)
+  elections: 550 items (2.41%)
+  education: 550 items (2.41%)
+  candidates-biography: 429 items (1.88%)
+  economy: 300 items (1.32%)
+  economy,jobs: 280 items (1.23%)
+  guns: 276 items (1.21%)
+  federal-budget: 268 items (1.18%)
+  energy: 223 items (0.98%)
+  jobs: 221 items (0.97%)
+  foreign-policy: 201 items (0.88%)
+  abortion: 196 items (0.86%)
+  state-budget: 169 items (0.74%)

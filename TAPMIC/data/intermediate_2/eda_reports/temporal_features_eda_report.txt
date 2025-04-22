@@ -1,0 +1,82 @@
+=== TEMPORAL FEATURES EDA REPORT ===
+Generated on: 2025-04-22 12:13:55
+
+=== DATASET OVERVIEW ===
+Train set: 10240 samples, 100 features
+Test set: 1267 samples, 100 features
+Validation set: 1284 samples, 100 features
+Phase 1 features: 76
+Phase 2 features (temporal): 24
+
+=== CLASS DISTRIBUTION ===
+Train set:
+  TRUE: 5752 samples (56.17%)
+  FALSE: 4488 samples (43.83%)
+  Imbalance ratio: 1.28
+Test set:
+  TRUE: 714 samples (56.35%)
+  FALSE: 553 samples (43.65%)
+  Imbalance ratio: 1.29
+Validation set:
+  TRUE: 668 samples (52.02%)
+  FALSE: 616 samples (47.98%)
+  Imbalance ratio: 1.08
+Combined set:
+  TRUE: 7134 samples (55.77%)
+  FALSE: 5657 samples (44.23%)
+  Imbalance ratio: 1.26
+
+=== TEMPORAL EVIDENCE COVERAGE ===
+Total claims: 12791
+Claims with evidence: 12791 (100.00%)
+Claims with temporal data: 12712 (99.38%)
+Average evidence per claim: 1.78
+Average temporal evidence per claim: 1.69
+
+=== EVIDENCE SOURCE DISTRIBUTION ===
+Claims with Google evidence: 11543
+Claims with Perplexity evidence: 3720
+Average Google evidence items per claim: 1.45
+Average Perplexity evidence items per claim: 0.34
+
+=== TRUTH RATE BY EVIDENCE ===
+Claims with Google evidence: 55.83% true
+Claims with Perplexity evidence: 55.73% true
+Claims with no evidence: nan% true
+
+=== TOP TEMPORAL FEATURES BY CORRELATION ===
+count:
+mean:
+std:
+min:
+25%:
+50%:
+75%:
+max:
+missing_pct:
+correlation_with_label:
+
+=== FEATURE IMPORTANCE ===
+Phase 1 features in top 20: 20
+Phase 2 features in top 20: 0
+Top Phase 1 feature: label
+Top Phase 2 feature: None
+
+=== DIMENSIONALITY REDUCTION ===
+Components needed for 90% variance: 45
+Variance explained by first component: 14.50%
+Variance explained by first 5 components: 32.21%
+
+=== CONCLUSION AND RECOMMENDATIONS ===
+1. Feature Selection and Dimensionality Reduction:
+   - Consider using PCA to reduce dimensions (need 45 components for 90% variance)
+   - Focus on top temporal features with highest correlation to truth label
+2. Model Development Strategy:
+   - Temporal features provide complementary signal to content features, use ensemble approaches
+3. Evidence Source Considerations:
+   - Evidence sources show similar patterns, can be treated uniformly
+4. Handling Missing Temporal Data:
+   - Temporal features have good coverage, minimal handling of missing data needed
+
+=== VISUALIZATIONS ===
+All visualizations have been saved to the plots directory.

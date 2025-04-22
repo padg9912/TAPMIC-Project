@@ -1,0 +1,111 @@
+# 4.2 Basic Statistics Analysis
+Generated on: 2025-04-22 00:43:03
+
+## 1. Dataset Shape Information
+- Train set: 10240 rows × 15 columns
+- Test set: 1267 rows × 15 columns
+- Validation set: 1284 rows × 15 columns
+- Combined dataset: 12791 rows × 15 columns
+
+### Column List
+**Numerical columns:** 
+
+**Count-based columns:** barely_true_counts, false_counts, half_true_counts, mostly_true_counts, pants_on_fire_counts
+
+**Categorical columns:** id, subject, speaker, speaker_job, state, party, context
+
+**Special columns:** label, original_label, statement
+
+## 2. Statement Length Analysis
+### Statement Length Statistics by Label (characters)
+**False statements:**
+- Mean: 104.0 chars
+- Median: 95.0 chars
+- Min: 11.0 chars
+- Max: 2099.0 chars
+- Standard Deviation: 52.3 chars
+
+**True statements:**
+- Mean: 109.6 chars
+- Median: 101.0 chars
+- Min: 11.0 chars
+- Max: 3192.0 chars
+- Standard Deviation: 71.0 chars
+
+### Word Count Statistics by Label
+**False statements:**
+- Mean: 17.4 words
+- Median: 16.0 words
+- Min: 2.0 words
+- Max: 309.0 words
+- Standard Deviation: 8.6 words
+
+**True statements:**
+- Mean: 18.5 words
+- Median: 17.0 words
+- Min: 2.0 words
+- Max: 467.0 words
+- Standard Deviation: 11.2 words
+
+
+![Statement Statistics](plots/4.2_statement_statistics.png)
+
+## 3. Speaker Truth History Analysis
+### Truth History Statistics
+These columns represent the speaker's history of truthfulness in previous statements:
+**Barely True Counts:**
+- Mean: 11.58
+- Median: 2.0
+- Min: 0.0
+- Max: 70.0
+- Standard Deviation: 18.98
+
+**False Counts:**
+- Mean: 13.36
+- Median: 2.0
+- Min: 0.0
+- Max: 114.0
+- Standard Deviation: 24.14
+
+**Half True Counts:**
+- Mean: 17.19
+- Median: 3.0
+- Min: 0.0
+- Max: 160.0
+- Standard Deviation: 35.85
+
+**Mostly True Counts:**
+- Mean: 16.5
+- Median: 3.0
+- Min: 0.0
+- Max: 163.0
+- Standard Deviation: 36.17
+
+**Pants On Fire Counts:**
+- Mean: 6.25
+- Median: 1.0
+- Min: 0.0
+- Max: 105.0
+- Standard Deviation: 16.18
+
+### Missing Values in Truth History
+- barely_true_counts: 2 missing values (0.02%)
+- false_counts: 2 missing values (0.02%)
+- half_true_counts: 2 missing values (0.02%)
+- mostly_true_counts: 2 missing values (0.02%)
+- pants_on_fire_counts: 2 missing values (0.02%)
+
+![Truth History Correlation](plots/4.2_truth_history_correlation.png)
+
+
+![Truth History by Label](plots/4.2_truth_history_by_label.png)
+
+## 4. Key Observations and Findings
+- True statements are on average 5.6 characters longer than False statements
+- True statements have on average 1.1 more words than False statements
+- Speakers making False statements have an average of 62.2 previous fact-checked statements
+- Speakers making True statements have an average of 66.99 previous fact-checked statements
+
+### Recommendations Based on Basic Statistics
+- **Handle missing truth history**: Fill missing truth history values with appropriate methods (e.g., zero for new speakers, mean/median for others).
+- **Create speaker credibility feature**: Calculate a credibility score based on the speaker's truth history (e.g., ratio of true statements to total statements).

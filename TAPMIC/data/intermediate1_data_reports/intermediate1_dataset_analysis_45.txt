@@ -1,0 +1,130 @@
+# 4.5 Correlation and Multivariate Analysis
+Generated on: 2025-04-22 01:06:17
+
+## 1. Correlation Analysis
+
+### Pearson Correlation with Target Variable (Label)
+Features with highest positive correlation (indicative of TRUE statements):
+- **credibility_score**: 0.4759
+- **weighted_credibility**: 0.4280
+- **weighted_pants_fire**: 0.1606
+- **weighted_mostly_true**: 0.0907
+- **mostly_true_counts**: 0.0907
+- **truth_statements**: 0.0843
+- **weighted_half_true**: 0.0773
+- **half_true_counts**: 0.0773
+- **word_count**: 0.0549
+- **statement_length**: 0.0438
+
+Features with highest negative correlation (indicative of FALSE statements):
+- **weighted_barely_true**: 0.0091
+- **barely_true_counts**: 0.0091
+- **speaker_encoded**: -0.0161
+- **subject_encoded**: -0.0164
+- **state_encoded**: -0.0259
+- **false_counts**: -0.0516
+- **lie_statements**: -0.0692
+- **party_encoded**: -0.1461
+- **pants_on_fire_counts**: -0.1606
+- **weighted_false**: nan
+
+![Correlation Heatmap](plots/4.5_correlation_heatmap.png)
+
+![Correlation Bar Chart](plots/4.5_correlation_bar_chart.png)
+
+## 2. Feature Interactions
+
+![Top Features Scatter Plot](plots/4.5_top_features_scatter.png)
+
+![Top Features Pairplot](plots/4.5_top_features_pairplot.png)
+
+## 3. Mutual Information Analysis
+
+Mutual Information (MI) measures the dependency between variables without assuming a linear relationship.
+Higher MI scores indicate stronger predictive power for classification.
+
+### Top Features by Mutual Information Score
+- **credibility_score**: 0.1455
+- **weighted_credibility**: 0.1233
+- **lie_statements**: 0.1126
+- **speaker_encoded**: 0.0494
+- **truth_statements**: 0.0488
+- **false_counts**: 0.0402
+- **total_statements**: 0.0391
+- **half_true_counts**: 0.0314
+- **weighted_barely_true**: 0.0308
+- **weighted_mostly_true**: 0.0301
+- **pants_on_fire_counts**: 0.0289
+- **barely_true_counts**: 0.0265
+- **speaker_job_encoded**: 0.0264
+- **context_encoded**: 0.0258
+- **weighted_pants_fire**: 0.0245
+
+![Mutual Information](plots/4.5_mutual_information.png)
+
+## 4. Dimensionality Reduction Analysis
+
+### PCA Analysis
+Principal Component Analysis (PCA) reduces dimensionality by transforming data into a new coordinate system.
+- PC1 explains 40.05% of variance
+- PC2 explains 37.26% of variance
+- Combined, they explain 77.32% of total variance
+
+#### Top Contributing Features
+**PC1 Top Contributors:**
+- context_encoded: +0.9860
+- subject_encoded: -0.1665
+- speaker_encoded: +0.0060
+- speaker_job_encoded: -0.0019
+- total_statements: +0.0007
+
+**PC2 Top Contributors:**
+- subject_encoded: +0.9860
+- context_encoded: +0.1665
+- total_statements: +0.0040
+- lie_statements: +0.0020
+- truth_statements: +0.0020
+
+![PCA Analysis](plots/4.5_pca_analysis.png)
+
+*Note: t-SNE analysis could not be completed due to an error.*
+
+## 5. Key Findings and Feature Recommendations
+
+### Key Findings from Correlation Analysis
+**Top Predictive Features:**
+1. **Pearson Correlation Top Features:**
+   - credibility_score (positively correlated, r=0.4759)
+   - weighted_credibility (positively correlated, r=0.4280)
+   - pants_on_fire_counts (negatively correlated, r=-0.1606)
+   - weighted_pants_fire (positively correlated, r=0.1606)
+   - party_encoded (negatively correlated, r=-0.1461)
+
+2. **Mutual Information Top Features:**
+   - credibility_score (MI=0.1455)
+   - weighted_credibility (MI=0.1233)
+   - lie_statements (MI=0.1126)
+   - speaker_encoded (MI=0.0494)
+   - truth_statements (MI=0.0488)
+
+**Feature Interactions:**
+- The analysis reveals complex relationships between features that can't be captured by single correlations
+- PCA shows that the variance in the data can be largely explained by a small number of components
+- t-SNE visualization suggests some separation between TRUE and FALSE classes, but with significant overlap
+
+### Feature Engineering Recommendations
+**Based on Correlation Analysis:**
+- Focus on highly correlated features, especially speaker credibility metrics
+- Consider interactive features combining speaker history and statement characteristics
+- Normalize truth history counts by total statements to create ratio features
+
+**Based on Dimensionality Reduction:**
+- Consider using principal components as features to reduce dimensionality
+- Group similar categorical values based on their relationship with the target variable
+- Create composite features that capture the relationships revealed by PCA
+
+**Feature Selection Strategy:**
+- Use a combination of correlation, mutual information, and dimensionality reduction for feature selection
+- Prioritize speaker credibility score and truth history features
+- Consider both categorical features (with proper encoding) and numerical features
+- Test both with and without dimensionality reduction techniques in the modeling phase

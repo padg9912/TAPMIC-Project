@@ -1,0 +1,92 @@
+# 4.3 Missing Value Analysis
+Generated on: 2025-04-22 00:49:21
+
+## 1. Overall Missing Value Summary
+
+### Missing Value Counts and Percentages
+
+```
+                      Train Missing  Train Missing %  Test Missing  Test Missing %  Valid Missing  Valid Missing %  Combined Missing  Combined Missing %
+speaker_job                    2898            28.30           325           25.65            345            26.87              3568               27.89
+state                          2210            21.58           262           20.68            279            21.73              2751               21.51
+context                         102             1.00            17            1.34             12             0.93               131                1.02
+subject                           2             0.02             0            0.00              0             0.00                 2                0.02
+speaker                           2             0.02             0            0.00              0             0.00                 2                0.02
+party                             2             0.02             0            0.00              0             0.00                 2                0.02
+barely_true_counts                2             0.02             0            0.00              0             0.00                 2                0.02
+false_counts                      2             0.02             0            0.00              0             0.00                 2                0.02
+half_true_counts                  2             0.02             0            0.00              0             0.00                 2                0.02
+mostly_true_counts                2             0.02             0            0.00              0             0.00                 2                0.02
+pants_on_fire_counts              2             0.02             0            0.00              0             0.00                 2                0.02
+```
+
+### Columns with Missing Values
+
+- **speaker_job**: 3568 values (27.89%) missing in the combined dataset
+- **state**: 2751 values (21.51%) missing in the combined dataset
+- **context**: 131 values (1.02%) missing in the combined dataset
+- **subject**: 2 values (0.02%) missing in the combined dataset
+- **speaker**: 2 values (0.02%) missing in the combined dataset
+- **party**: 2 values (0.02%) missing in the combined dataset
+- **barely_true_counts**: 2 values (0.02%) missing in the combined dataset
+- **false_counts**: 2 values (0.02%) missing in the combined dataset
+- **half_true_counts**: 2 values (0.02%) missing in the combined dataset
+- **mostly_true_counts**: 2 values (0.02%) missing in the combined dataset
+- **pants_on_fire_counts**: 2 values (0.02%) missing in the combined dataset
+
+## 2. Missing Values by Label
+
+```
+                      True Missing  True Missing %  False Missing  False Missing %
+speaker_job                   1811           25.39           1757            31.06
+state                         1329           18.63           1422            25.14
+context                         72            1.01             59             1.04
+subject                          0            0.00              2             0.04
+speaker                          0            0.00              2             0.04
+party                            0            0.00              2             0.04
+barely_true_counts               0            0.00              2             0.04
+false_counts                     0            0.00              2             0.04
+half_true_counts                 0            0.00              2             0.04
+mostly_true_counts               0            0.00              2             0.04
+pants_on_fire_counts             0            0.00              2             0.04
+```
+
+
+![Missing Values by Label](plots/4.3_missing_values_by_label.png)
+
+### Analysis of Missing Values by Label
+
+- **speaker_job**: Missing values are 5.67% more common in FALSE statements
+- **state**: Missing values are 6.51% more common in FALSE statements
+
+## 3. Missing Value Patterns
+
+![Missing Value Correlation](plots/4.3_missing_value_correlation.png)
+
+![Missing Value Percentage](plots/4.3_missing_value_percentage.png)
+
+
+## 4. Recommendations for Missing Value Handling
+
+### Column-Specific Recommendations
+
+- **speaker_job**: Fill with the most frequent value or a special 'UNKNOWN' category
+- **state**: Fill with the most frequent value or a special 'UNKNOWN' category
+- **context**: Fill with a special placeholder like 'UNKNOWN' or 'OTHER'
+  - Alternative: Create a binary feature 'context_missing' to flag missing values
+- **subject**: Fill with a special placeholder like 'UNKNOWN' or 'OTHER'
+  - Alternative: Create a binary feature 'subject_missing' to flag missing values
+- **speaker**: Consider imputing with mean/median for numeric or mode for categorical variables
+- **party**: Fill with the most frequent value or a special 'UNKNOWN' category
+- **barely_true_counts**: Fill with 0 (assuming missing means no previous statements)
+- **false_counts**: Fill with 0 (assuming missing means no previous statements)
+- **half_true_counts**: Fill with 0 (assuming missing means no previous statements)
+- **mostly_true_counts**: Fill with 0 (assuming missing means no previous statements)
+- **pants_on_fire_counts**: Fill with 0 (assuming missing means no previous statements)
+
+### General Recommendations
+
+- **High Missing Value Columns**: Consider dropping columns with extremely high missing value rates (>80%)
+- **Preprocessing Pipeline**: Create a consistent missing value handling strategy in the preprocessing pipeline
+- **Missing Value Flags**: Create binary flags for columns where missingness might be informative
+- **Document Strategy**: Document the missing value handling strategy for each field to ensure consistency

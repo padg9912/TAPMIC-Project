@@ -1,0 +1,96 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+virtualenv/
+.virtualenv/
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Data files and large model files (keep only training code for GitHub)
+*.csv
+*.json
+*.pkl
+*.h5
+*.pt
+*.bin
+*.tar
+*.gz
+*.zip
+*.hdf5
+*.npy
+*.npz
+model_files/
+*.ckpt
+checkpoints/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logs and temp files
+logs/
+*.log
+temp/
+tmp/
+.cache/
+
+# Wandb metadata
+wandb/
+
+# Specific to your project
+TAPMIC/rag_pipeline/evidence_data/*.json
+TAPMIC/data/raw/*.csv
+TAPMIC/data/intermediate_1/*.csv
+TAPMIC/data/intermediate_2/*.csv
+TAPMIC/models/checkpoints/
+TAPMIC/models/reports/
+
+# Credentials (to avoid accidental exposure)
+.env
+*api_key*
+*credentials*
+*config.ini*
+*secret*
+
+# Additional system and temporary files
+.history/
+.hypothesis/
+.mypy_cache/
+.ruff_cache/
+node_modules/
+Thumbs.db
+desktop.ini 

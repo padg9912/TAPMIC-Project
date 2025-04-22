@@ -1,0 +1,42 @@
+=== FEATURE PROCESSING REPORT ===
+Generated on: 2025-04-22 12:48:55
+
+=== DATASET STATISTICS ===
+Train set: 10240 samples, 45 features
+Test set: 1267 samples, 45 features
+Validation set: 1284 samples, 45 features
+
+=== FEATURE COUNTS ===
+metadata_fields: 5
+text_features: 6
+credibility_features: 4
+categorical_features: 5
+temporal_features: 20
+missing_indicators: 4
+total_features: 44
+
+=== TEMPORAL FEATURES SUMMARY ===
+evidence_count: 100.00% coverage
+temporal_evidence_count: 100.00% coverage
+mean_publication_year: 100.00% coverage
+publication_date_range_days: 100.00% coverage
+multiple_dates_percentage: 100.00% coverage
+is_election_year_claim: 100.00% coverage
+days_to_nearest_election: 0.00% coverage
+in_campaign_season: 100.00% coverage
+perplexity_evidence_count: 100.00% coverage
+google_evidence_count: 100.00% coverage
+days_between_claim_and_earliest_evidence: 0.00% coverage
+days_between_claim_and_latest_evidence: 0.00% coverage
+temporal_consistency_score: 0.00% coverage
+speaker_30day_true_ratio: 0.00% coverage
+speaker_90day_true_ratio: 0.00% coverage
+speaker_180day_true_ratio: 0.00% coverage
+speaker_30day_claim_count: 100.00% coverage
+speaker_90day_claim_count: 100.00% coverage
+speaker_180day_claim_count: 100.00% coverage
+speaker_evidence_consistency: 0.00% coverage
+
+=== CLASS DISTRIBUTION ===
+TRUE samples: 5752 (56.17%)
+FALSE samples: 4488 (43.83%)
